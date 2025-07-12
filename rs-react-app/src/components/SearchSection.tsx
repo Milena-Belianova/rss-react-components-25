@@ -1,7 +1,9 @@
-import { Component } from 'react';
+import { Component, type KeyboardEvent } from 'react';
 
 interface SearchSectionProps {
   onSearch: (term: string) => void;
+  initialSearchTerm?: string;
+  isLoading: boolean;
 }
 
 interface SearchSectionState {
@@ -11,20 +13,24 @@ interface SearchSectionState {
 class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
   constructor(props: SearchSectionProps) {
     super(props);
-    const savedTerm = localStorage.getItem('searchTerm') || '';
     this.state = {
-      searchTerm: savedTerm,
+      searchTerm: props.initialSearchTerm || '',
     };
   }
 
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({ searchTerm: e.target.value });
   };
 
-  handleSearch = () => {
-    const { searchTerm } = this.state;
-    localStorage.setItem('searchTerm', searchTerm);
-    this.props.onSearch(searchTerm);
+  handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter') {
+      this.triggerSearch();
+    }
+  };
+
+  triggerSearch = (): void => {
+    const processedTerm = this.state.searchTerm.trim();
+    this.props.onSearch(processedTerm);
   };
 
   render() {
@@ -35,14 +41,17 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
             type="text"
             value={this.state.searchTerm}
             onChange={this.handleInputChange}
-            placeholder="Enter search term..."
+            onKeyDown={this.handleKeyDown}
+            placeholder="Enter Pokemon name..."
             className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+            disabled={this.props.isLoading}
           />
           <button
-            onClick={this.handleSearch}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium"
+            onClick={this.triggerSearch}
+            disabled={this.props.isLoading}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Search
+            {this.props.isLoading ? 'Searching...' : 'Search'}
           </button>
         </div>
       </div>
