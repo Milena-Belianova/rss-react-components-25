@@ -70,10 +70,10 @@ class App extends Component<Record<string, never>, AppState> {
     return (
       <ErrorBoundary>
         <div className="mx-auto px-4 max-w-7xl min-h-screen flex flex-col">
-          <div className="flex-1 flex flex-col justify-center py-8">
-            <div className="flex flex-col max-w-3xl w-full mx-auto gap-10">
+          <div className="min-h-[220px] sm:min-h-[280px] md:min-h-[300px] flex flex-col justify-center py-4 sm:py-8">
+            <div className="flex flex-col max-w-3xl w-full mx-auto sm:gap-6 md:gap-10">
               <h1
-                className="text-5xl font-bold mb-6 text-center 
+                className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center 
                text-yellow text-stroke-blue
                tracking-wide"
               >
@@ -87,7 +87,7 @@ class App extends Component<Record<string, never>, AppState> {
             </div>
           </div>
 
-          <div className="flex-2 pb-12 w-full">
+          <div className="flex-1 pb-12 w-full">
             <ContentSection
               pokemons={this.state.pokemons}
               isLoading={this.state.isLoading}

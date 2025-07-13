@@ -35,21 +35,26 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
 
   render() {
     return (
-      <div className="bg-gray-100 p-6 rounded-xl shadow-md">
-        <div className="flex gap-3">
+      <div className="bg-gray-100 p-4 sm:p-6 rounded-xl shadow-md">
+        <div className="flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             value={this.state.searchTerm}
             onChange={this.handleInputChange}
             onKeyDown={this.handleKeyDown}
             placeholder="Enter Pokemon name..."
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+            className="flex-1 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base
+                     border border-gray-300 rounded-lg 
+                     focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={this.props.isLoading}
           />
           <button
             onClick={this.triggerSearch}
             disabled={this.props.isLoading}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base
+                     bg-blue-600 text-white rounded-lg 
+                     hover:bg-blue-700 transition-colors 
+                     disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {this.props.isLoading ? 'Searching...' : 'Search'}
           </button>

@@ -12,12 +12,12 @@ class PokemonCard extends Component<PokemonCardProps> {
 
     return (
       <div
-        className={`bg-gray-100 p-6 rounded-lg hover:shadow-md transition-shadow ${
+        className={`bg-gray-100 p-6 rounded-lg hover:shadow-md transition-shadow flex flex-col ${
           isLoading ? 'opacity-50' : ''
         }`}
       >
         {pokemon.image && (
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-4 flex-shrink-0">
             <img
               src={pokemon.image}
               alt={pokemon.name}
