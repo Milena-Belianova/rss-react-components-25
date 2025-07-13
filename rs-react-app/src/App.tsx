@@ -3,6 +3,7 @@ import SearchSection from './components/SearchSection';
 import ContentSection from './components/ContentSection';
 import { fetchPokemonListWithDetails, searchPokemon } from './api/pokemonApi';
 import type { Pokemon } from './api/types';
+import ErrorBoundary from './components/ErrorBoundary';
 
 interface AppState {
   pokemons: Pokemon[];
@@ -67,32 +68,34 @@ class App extends Component<Record<string, never>, AppState> {
 
   render() {
     return (
-      <div className="mx-auto px-4 max-w-7xl min-h-screen flex flex-col">
-        <div className="flex-1 flex flex-col justify-center py-8">
-          <div className="flex flex-col max-w-3xl w-full mx-auto gap-10">
-            <h1
-              className="text-5xl font-bold mb-6 text-center 
+      <ErrorBoundary>
+        <div className="mx-auto px-4 max-w-7xl min-h-screen flex flex-col">
+          <div className="flex-1 flex flex-col justify-center py-8">
+            <div className="flex flex-col max-w-3xl w-full mx-auto gap-10">
+              <h1
+                className="text-5xl font-bold mb-6 text-center 
                text-yellow text-stroke-blue
                tracking-wide"
-            >
-              Find your Pokemon
-            </h1>
-            <SearchSection
-              onSearch={this.handleSearch}
-              initialSearchTerm={this.state.searchTerm}
+              >
+                Find your Pokemon
+              </h1>
+              <SearchSection
+                onSearch={this.handleSearch}
+                initialSearchTerm={this.state.searchTerm}
+                isLoading={this.state.isLoading}
+              />
+            </div>
+          </div>
+
+          <div className="flex-2 pb-12 w-full">
+            <ContentSection
+              pokemons={this.state.pokemons}
               isLoading={this.state.isLoading}
+              error={this.state.error}
             />
           </div>
         </div>
-
-        <div className="flex-2 pb-12 w-full">
-          <ContentSection
-            pokemons={this.state.pokemons}
-            isLoading={this.state.isLoading}
-            error={this.state.error}
-          />
-        </div>
-      </div>
+      </ErrorBoundary>
     );
   }
 }
