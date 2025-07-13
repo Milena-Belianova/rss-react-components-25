@@ -34,3 +34,8 @@ export interface PokemonSpecies {
     };
   }[];
 }
+
+export interface ApiError {
+  message: string;
+  status?: number;
+}
