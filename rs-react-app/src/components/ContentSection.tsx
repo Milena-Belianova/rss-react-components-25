@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import type { Pokemon } from '../api/types';
+import PokemonCardList from './PokemonCardList';
 
 interface ContentSectionProps {
   pokemons: Pokemon[];
@@ -48,32 +49,7 @@ class ContentSection extends Component<ContentSectionProps> {
               <p className="text-gray-500 text-lg">No Pokemon found</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {pokemons.map((pokemon) => (
-                <div
-                  key={pokemon.name}
-                  className={`bg-gray-100 p-6 rounded-lg hover:shadow-md transition-shadow ${isLoading ? 'opacity-50' : ''}`}
-                >
-                  {pokemon.image && (
-                    <div className="flex justify-center mb-4">
-                      <img
-                        src={pokemon.image}
-                        alt={pokemon.name}
-                        className="h-32 w-32 object-contain"
-                      />
-                    </div>
-                  )}
-                  <h3 className="text-xl font-bold capitalize mb-2 text-center text-blue-600">
-                    {pokemon.name}
-                  </h3>
-                  {pokemon.description && (
-                    <p className="text-gray-700 text-sm">
-                      {pokemon.description}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+            <PokemonCardList pokemons={pokemons} isLoading={isLoading} />
           )}
         </div>
       </div>
