@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* custom text-stroke style for tailwind */
 @layer utilities {
