@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+/* custom text-stroke style for tailwind */
+@layer utilities {
+  .text-stroke-blue {
+    -webkit-text-stroke: 1px #3b82f6;
+  }
+  .text-yellow {
+    color: #facc15;
+  }
+}
