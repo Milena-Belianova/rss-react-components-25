@@ -11,6 +11,10 @@
     "format:fix": "prettier --write .",
     "prepare": "husky"
   },
+  "husky": {
+    "directory": ".husky",
+    "hooksPath": "../.git/hooks"
+  },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "react": "^19.1.0",
