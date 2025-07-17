@@ -1,17 +1,10 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import type { Pokemon } from '../api/types';
 import { cleanup, render, screen } from '@testing-library/react';
 import PokemonCard from './PokemonCard';
+import { mockPokemons } from '../test-utils/mocks/pokemon';
 
 describe('PokemonCard', () => {
-  const mockPokemon: Pokemon = {
-    name: 'charmander',
-    url: 'https://pokeapi.co/api/v2/pokemon/4/',
-    description:
-      'Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.',
-    image:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
-  };
+  const mockPokemon = mockPokemons[0];
 
   afterEach(() => {
     cleanup();
