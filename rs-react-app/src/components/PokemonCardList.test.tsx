@@ -1,22 +1,27 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import PokemonCardList from './PokemonCardList';
-import { PokemonCardListMocks } from '../test-utils/mocks/pokemonCardList';
+import { mockPokemons } from '../test-utils/mocks/data/pokemon';
 
 describe('PokemonCardList', () => {
+  const defaultProps = {
+    pokemons: mockPokemons,
+    isLoading: false,
+  };
+
   afterEach(() => {
     cleanup();
   });
 
   it('should render correct number of items when data is provided', () => {
-    render(<PokemonCardList {...PokemonCardListMocks.default} />);
+    render(<PokemonCardList {...defaultProps} />);
     expect(screen.getAllByTestId('pokemon-card')).toHaveLength(
-      PokemonCardListMocks.default.pokemons.length
+      defaultProps.pokemons.length
     );
   });
 
   it('should show loading state while fetching data', () => {
-    render(<PokemonCardList {...PokemonCardListMocks.loading} />);
+    render(<PokemonCardList {...defaultProps} isLoading={true} />);
     const cards = screen.getAllByTestId('pokemon-card');
     cards.forEach((card) => {
       expect(card).toHaveClass('opacity-50');
@@ -24,9 +29,9 @@ describe('PokemonCardList', () => {
   });
 
   it('should correctly display pokemon names and descriptions', () => {
-    render(<PokemonCardList {...PokemonCardListMocks.default} />);
+    render(<PokemonCardList {...defaultProps} />);
 
-    PokemonCardListMocks.default.pokemons.forEach((pokemon) => {
+    defaultProps.pokemons.forEach((pokemon) => {
       expect(screen.getByText(pokemon.name)).toBeInTheDocument();
 
       if (pokemon.description) {
@@ -36,9 +41,9 @@ describe('PokemonCardList', () => {
   });
 
   it('should correctly display pokemon images', () => {
-    render(<PokemonCardList {...PokemonCardListMocks.default} />);
+    render(<PokemonCardList {...defaultProps} />);
 
-    PokemonCardListMocks.default.pokemons.forEach((pokemon) => {
+    defaultProps.pokemons.forEach((pokemon) => {
       const image = screen.getByAltText(pokemon.name);
       expect(image).toBeInTheDocument();
       expect(image).toHaveAttribute('src', pokemon.image);

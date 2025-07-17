@@ -1,4 +1,4 @@
-import type { Pokemon } from '../../api/types';
+import type { Pokemon } from '../../../api/types';
 
 export const mockPokemons: Pokemon[] = [
   {

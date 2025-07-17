@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { mockPokemons } from '../test-utils/mocks/pokemon';
+import { mockPokemons } from '../test-utils/mocks/data/pokemon';
 import ContentSection from './ContentSection';
 import userEvent from '@testing-library/user-event';
 
