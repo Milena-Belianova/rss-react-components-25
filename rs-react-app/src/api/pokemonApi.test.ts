@@ -50,29 +50,41 @@ describe('pokemonApi', () => {
     });
 
     it('should handle errors for individual pokemon', async () => {
-      mockApiClient.get
-        .mockResolvedValueOnce(mockPokemonListResponse)
-        .mockResolvedValueOnce(mockPokemonDetails)
-        .mockRejectedValueOnce(new Error('Network error'))
-        .mockResolvedValueOnce(mockPokemonDetails)
-        .mockResolvedValueOnce(mockPokemonSpecies);
+      const originalConsoleError = console.error;
+      console.error = vi.fn();
 
-      const result = await fetchPokemonListWithDetails();
+      try {
+        mockApiClient.get
+          .mockResolvedValueOnce(mockPokemonListResponse)
+          .mockResolvedValueOnce(mockPokemonDetails)
+          .mockRejectedValueOnce(new Error('Network error'))
+          .mockResolvedValueOnce(mockPokemonDetails)
+          .mockResolvedValueOnce(mockPokemonSpecies);
 
-      expect(result).toEqual([
-        {
-          name: 'bulbasaur',
-          url: 'https://pokeapi.co/api/v2/pokemon/1/',
-          description: 'Failed to load description',
-        },
-        {
-          name: 'charmander',
-          url: 'https://pokeapi.co/api/v2/pokemon/4/',
-          image: 'charmander-artwork.png',
-          description:
-            'A flame burns on the tip of its tail. It is said to be born in volcanoes.',
-        },
-      ]);
+        const result = await fetchPokemonListWithDetails();
+
+        expect(console.error).toHaveBeenCalledWith(
+          'Failed to load details for bulbasaur:',
+          expect.any(Error)
+        );
+
+        expect(result).toEqual([
+          {
+            name: 'bulbasaur',
+            url: 'https://pokeapi.co/api/v2/pokemon/1/',
+            description: 'Failed to load description',
+          },
+          {
+            name: 'charmander',
+            url: 'https://pokeapi.co/api/v2/pokemon/4/',
+            image: 'charmander-artwork.png',
+            description:
+              'A flame burns on the tip of its tail. It is said to be born in volcanoes.',
+          },
+        ]);
+      } finally {
+        console.error = originalConsoleError;
+      }
     });
   });
 
