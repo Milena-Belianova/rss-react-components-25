@@ -10,7 +10,7 @@ import { describe, it, expect, vi } from 'vitest';
 import App from './App';
 import { setupTests } from './test-utils/setupTests';
 import userEvent from '@testing-library/user-event';
-import { mockPokemons } from './test-utils/mocks/data/pokemon';
+import { mockPokemons } from './test-utils/mocks/pokemonData';
 import { localStorageMock } from './test-utils/mocks/localStorage';
 
 setupTests();

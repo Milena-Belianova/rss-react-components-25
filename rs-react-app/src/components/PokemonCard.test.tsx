@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import PokemonCard from './PokemonCard';
-import { mockPokemons } from '../test-utils/mocks/data/pokemon';
+import { mockPokemons } from '../test-utils/mocks/pokemonData';
 
 describe('PokemonCard', () => {
   const mockPokemon = mockPokemons[0];

@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import type { Pokemon } from '../../../api/types';
-import { mockPokemons } from '../data/pokemon';
+import { mockPokemons } from '../pokemonData';
 
 export const mockFetchPokemonListWithDetails = vi.fn(
   (): Promise<Pokemon[]> => Promise.resolve(mockPokemons)

@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import PokemonCardList from './PokemonCardList';
-import { mockPokemons } from '../test-utils/mocks/data/pokemon';
+import { mockPokemons } from '../test-utils/mocks/pokemonData';
 
 describe('PokemonCardList', () => {
   const defaultProps = {
