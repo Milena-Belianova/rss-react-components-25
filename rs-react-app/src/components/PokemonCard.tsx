@@ -12,6 +12,7 @@ class PokemonCard extends Component<PokemonCardProps> {
 
     return (
       <div
+        data-testid="pokemon-card"
         className={`bg-gray-100 p-6 rounded-lg hover:shadow-md transition-shadow flex flex-col ${
           isLoading ? 'opacity-50' : ''
         }`}
