@@ -8,7 +8,7 @@ export const mockFetchPokemonListWithDetails = vi.fn(
 
 export const mockSearchPokemon = vi.fn(
   (term: string): Promise<Pokemon[]> =>
-    Promise.resolve(mockPokemons.filter((p) => p.name.includes(term.trim())))
+    Promise.resolve(mockPokemons.filter((p) => p.name === term.trim()))
 );
 
 export const mockApiError = (message = 'API Error') => {

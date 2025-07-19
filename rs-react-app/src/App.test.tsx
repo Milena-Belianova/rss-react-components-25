@@ -75,19 +75,19 @@ describe('App Component', () => {
       await waitFor(() => {
         expect(input).toBeEnabled();
       });
-      await user.type(input, 'char');
-      expect(input).toHaveValue('char');
+      await user.type(input, 'charmander');
+      expect(input).toHaveValue('charmander');
       await user.click(button);
 
       await waitFor(() => {
         expect(mockFetchPokemonListWithDetails).toHaveBeenCalledTimes(1);
         expect(mockSearchPokemon).toHaveBeenCalledTimes(1);
-        expect(mockSearchPokemon).toHaveBeenCalledWith('char');
+        expect(mockSearchPokemon).toHaveBeenCalledWith('charmander');
         expect(screen.getByText('charmander')).toBeInTheDocument();
 
         expect(localStorage.setItem).toHaveBeenCalledWith(
           'pokemonSearchTerm',
-          'char'
+          'charmander'
         );
       });
     });
